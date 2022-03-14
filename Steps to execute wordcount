@@ -1,0 +1,40 @@
+hadoop@cclab:~$ hadoop version
+
+hadoop@cclab:~$ java -version
+
+hadoop@cclab:~$ export HADOOP_CLASSPATH=$(hadoop classpath)
+hadoop@cclab:~$ echo $HADOOP_CLASSPATH
+
+hadoop@cclab:~$ hadoop fs -mkdir /WordCountTutorial
+
+hadoop@cclab:~$ hadoop fs -mkdir /WordCountTutorial
+
+hadoop@cclab:~$ hadoop fs -mkdir /WordCountTutorial/Input
+
+hadoop@cclab:~$ hadoop fs -put '/home/hadoop/Desktop/
+
+hadoop@cclab:~$ cd /home/hadoop/Desktop/WordCountTutorial
+hadoop@cclab:~/Desktop/WordCountTutorial$ javac -classpath ${HADOOP_CLASSPATH} -d '/home/hadoop/Desktop/WordCountTutorial/tutorial_classes' '/home/hadoop/Desktop/WordCountTutorial/WordCount.java' 
+
+hadoop@cclab:~/Desktop/WordCountTutorial$ jar -cvf firstTutorial.jar -C tutorial_classes/ .
+
+hadoop@cclab:~/Desktop/WordCountTutorial$ hadoop jar '/home/hadoop/Desktop/WordCountTutorial/firstTutorial.jar' WordCount /WordCountTutorial/Input /WordCountTutorial/Output
+
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+
+
+hadoop@cclab:~/Desktop/WordCountTutorial$ hadoop dfs -cat /WordCountTutorial/Output/*
